@@ -1,0 +1,22 @@
+class Solution {
+    public static int countSetBits(int n) {
+        if (n == 0) return 0;
+
+        int x = largestPowerOf2(n);
+
+        int bitsUpto2PowerX = x * (1 << (x - 1));
+
+        int msbBitsFrom2PowerXToN = n - (1 << x) + 1;
+
+        int rest = n - (1 << x);
+
+        return bitsUpto2PowerX + msbBitsFrom2PowerXToN + countSetBits(rest);
+    }
+    private static int largestPowerOf2(int n) {
+        int x = 0;
+        while ((1 << (x + 1)) <= n) {
+            x++;
+        }
+        return x;
+    }
+}
